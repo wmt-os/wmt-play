@@ -1,0 +1,76 @@
+.TH WMT-PLAY 1
+.SH NAME
+wmt-play \- WonderMedia WM8505 MJPEG video player
+.SH SYNOPSIS
+.B wmt-play
+.RB [ \-s
+.IR sec ]
+.RB [ \-l ]
+.RB [ \-a ]
+.RB [ \-v ]
+.I file
+.SH DESCRIPTION
+.B wmt-play
+is a fullscreen video player for the WonderMedia WM8505, playing MJPEG AVI
+files.
+The video hardware decodes each frame and scales it to the panel, keeping
+its aspect ratio.
+Only 16-bit PCM audio is played.
+.PP
+It runs under X, which leases it the display for the length of playback.
+Audio plays through the ALSA
+.B front
+device of the default sound card, and
+.B wmt-play
+holds the card until it exits.
+If another program is using the sound card,
+.B wmt-play
+exits with an error.
+The
+.B \-a
+option plays the video silently.
+.PP
+Files are prepared on another computer with
+.BR ffmpeg (1),
+using the
+.B \%wmt-encode.sh
+script from the wmt-play source.
+.SH OPTIONS
+.TP
+.BI \-s " sec"
+Start
+.I sec
+seconds into the file.
+.TP
+.B \-l
+Loop the file.
+.TP
+.B \-a
+Disable audio.
+.TP
+.B \-v
+Print the presentation time, clock, and dropped frame count at each frame.
+.TP
+.B \-h
+Print usage and exit.
+.SH KEYS
+.TP
+.B Space
+Pause or resume.
+.TP
+.BR Left ", " Right
+Seek back or forward 5 seconds.
+.TP
+.BR Down ", " Up
+Seek back or forward 30 seconds.
+.TP
+.BR Comma ", " Period
+Step back or forward one frame while paused.
+.TP
+.BR q ", " Escape
+Quit.
+.SH SEE ALSO
+.BR ffmpeg (1),
+.BR wmt (4)
+.SH AUTHORS
+Logan Russell.
