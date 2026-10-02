@@ -20,6 +20,6 @@ w=${RES%x*} h=${RES#*x}
 
 # Convert matrix to BT.601 for the hardware color converters
 exec ffmpeg -nostdin -hide_banner -y -i "$in" \
-	-vf "scale='min($w,iw)':'min($h,ih)':force_original_aspect_ratio=decrease:flags=lanczos+accurate_rnd:out_color_matrix=bt601,format=yuv420p" \
+	-vf "scale='min($w,iw)':'min($h,ih)':force_original_aspect_ratio=decrease:flags=lanczos+accurate_rnd+full_chroma_int:out_color_matrix=bt601,format=yuv420p" \
 	-c:v mjpeg -b:v 20M -maxrate 20M -bufsize 2M \
 	-c:a pcm_s16le -ar 48000 -ac 2 "$out"
